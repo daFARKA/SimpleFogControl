@@ -35,6 +35,7 @@ public class FogRendererMixin {
                                )
                             ); 
         if (fogType == FogType.LAVA) {
+            if (SimpleFogMain.config.lavaToggle) overrideLavaFog(viewDistance, entity, info);
         } else if (fogType == FogType.POWDER_SNOW) {
         } else if (mobEffect) {
         } else if (fogType == FogType.WATER) {
@@ -76,6 +77,14 @@ public class FogRendererMixin {
         FogParameters parameters = info.getReturnValue();
         fogStart = viewDistance * SimpleFogMain.config.terrainStart * 0.01f;
         fogEnd = viewDistance * SimpleFogMain.config.terrainEnd * 0.01f;
+        info.setReturnValue(new FogParameters(fogStart, fogEnd, parameters.shape(), parameters.red(), parameters.green(), parameters.blue(), parameters.alpha()));
+    }
+
+    private static void overrideLavaFog(float viewDistance, Entity entity, CallbackInfoReturnable<FogParameters> info) {
+        float fogStart, fogEnd;
+        FogParameters parameters = info.getReturnValue();
+        fogStart = viewDistance * SimpleFogMain.config.lavaStart * 0.01f;
+        fogEnd = viewDistance * SimpleFogMain.config.lavaEnd * 0.01f;
         info.setReturnValue(new FogParameters(fogStart, fogEnd, parameters.shape(), parameters.red(), parameters.green(), parameters.blue(), parameters.alpha()));
     }
 }

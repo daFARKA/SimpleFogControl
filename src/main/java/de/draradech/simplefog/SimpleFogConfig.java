@@ -28,4 +28,11 @@ public class SimpleFogConfig implements ConfigData {
     public float netherStart = 5.0f;
     @ConfigEntry.Category(value = "nether")
     public float netherEnd = 80.0f;
+
+    @ConfigEntry.Category(value = "lava")
+    public boolean lavaToggle = true;
+    @ConfigEntry.Category(value = "lava")
+    public float lavaStart = -20.0f;
+    @ConfigEntry.Category(value = "lava")
+    public float lavaEnd = 5.0f;
 }
